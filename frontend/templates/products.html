@@ -1,0 +1,19 @@
+{{define "content"}}
+<div>
+    <h2>Nuestros Productos</h2>
+    <div class="products">
+        {{if .Products}}
+            {{range .Products}}
+                <div class="product">
+                    <h3>{{.Name}}</h3>
+                    <p>{{.Description}}</p>
+                    <p>Precio: ${{.Price}}</p>
+                    <p>Stock: {{.Stock}}</p>
+                </div>
+            {{end}}
+        {{else}}
+            <p>No hay productos disponibles</p>
+        {{end}}
+    </div>
+</div>
+{{end}}
