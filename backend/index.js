@@ -15,9 +15,11 @@ mongoose.connect(process.env.MONGODB_URI)
 
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
+const orderRoutes = require('./routes/orders'); 
 
 app.use('/', authRoutes);
 app.use('/', productRoutes);
+app.use('/', orderRoutes);  
 
 app.listen(3000, () => {
   console.log(`Server running http://localhost:${3000}`);

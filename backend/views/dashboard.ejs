@@ -7,7 +7,12 @@
     <h1>Dashboard</h1>
     <p>Bienvenido al panel de administración</p>
     
-    <a href="/products" id="productsLink">Ver Productos</a>
+    <nav>
+        <ul>
+            <li><a href="/products" id="productsLink">Ver Productos</a></li>
+            <li><a href="/orders" id="ordersLink">Ver Pedidos</a></li>
+        </ul>
+    </nav>
 
     <script>
         localStorage.setItem('authToken', '<%= token %>');
@@ -15,6 +20,11 @@
         document.getElementById('productsLink').addEventListener('click', function(e) {
             e.preventDefault();
             window.location.href = '/products?token=' + localStorage.getItem('authToken');
+        });
+
+        document.getElementById('ordersLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/orders?token=' + localStorage.getItem('authToken');
         });
     </script>
 </body>

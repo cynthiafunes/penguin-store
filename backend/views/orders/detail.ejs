@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle de Pedido</title>
+</head>
+<body>
+    <h1>Detalle de Pedido</h1>
+    
+    <h3>Información del Cliente</h3>
+    <p><strong>Nombre:</strong> <%= order.customerName %></p>
+    <p><strong>Dirección:</strong> <%= order.address %></p>
+    <p><strong>Fecha:</strong> <%= order.date.toLocaleDateString() %></p>
+    <p><strong>Estado:</strong> <%= order.status %></p>
+
+    <h3>Productos</h3>
+    <table border="1">
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+        </tr>
+        <% order.products.forEach(function(product) { %>
+            <tr>
+                <td><%= product.name %></td>
+                <td><%= product.quantity %></td>
+                <td>₲<%= product.price %></td>
+                <td>₲<%= product.quantity * product.price %></td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <h3>Total: ₲<%= order.total %></h3>
+    
+    <br>
+    <a href="/orders?token=<%= query.token %>">Volver a la lista de pedidos</a>
+</body>
+</html>
