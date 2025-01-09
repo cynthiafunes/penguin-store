@@ -4,36 +4,37 @@ const jwt = require('jsonwebtoken');
 const Admin = require('../models/admin');
 
 router.get('/login', function(req, res) {
-  res.render('login');
+    res.render('login', { error: null });
+});
+
+router.get('/dashboard', function(req, res) {
+    res.render('dashboard');
 });
 
 router.post('/login', function(req, res) {
-  const username = req.body.username;
-  const password = req.body.password;
+    let username = req.body.username;
+    let password = req.body.password;
 
-  Admin.findOne({ username: username }, function(err, admin) {
-    if (err) {
-      res.render('login', { error: 'Error del servidor' });
-      return;
-    }
+    Admin.findOne({ username: username })
+        .then(function(admin) {
+            if (!admin) {
+                return res.render('login', { error: 'Usuario no existe' });
+            }
 
-    if (!admin) {
-      res.render('login', { error: 'Usuario no encontrado' });
-      return;
-    }
+            if (admin.password !== password) {
+                return res.render('login', { error: 'Contraseña incorrecta' });
+            }
 
-    if (admin.password !== password) {
-      res.render('login', { error: 'Contraseña incorrecta' });
-      return;
-    }
+            let token = jwt.sign(
+                { adminId: admin._id },
+                process.env.JWT_SECRET
+            );
 
-    const token = jwt.sign({ 
-      username: admin.username 
-    }, process.env.JWT_SECRET);
-
-    res.cookie('token', token);
-    res.redirect('/dashboard');
-  });
+            res.render('dashboard', { token: token });
+        })
+        .catch(function(error) {
+            res.render('login', { error: 'Error del servidor' });
+        });
 });
 
 module.exports = router;

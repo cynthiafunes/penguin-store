@@ -1,21 +1,19 @@
 const jwt = require('jsonwebtoken');
 
-function checkAuth(req, res, next) {
-  const token = req.headers.authorization;
-  
-  if (!token) {
-    res.redirect('/login');
-    return;
-  }
+function verificarToken(req, res, next) {
+    let token = req.headers.authorization;
 
-  jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
-    if (err) {
-      res.redirect('/login');
-      return;
+    if (!token) {
+        return res.redirect('/login');
     }
-    req.admin = decoded;
-    next();
-  });
+
+    try {
+        let decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.adminId = decoded.adminId;
+        next();
+    } catch (error) {
+        return res.redirect('/login');
+    }
 }
 
-module.exports = checkAuth;
+module.exports = verificarToken;
