@@ -1,20 +1,25 @@
 {{define "content"}}
-<div>
+<section>
     <h2>Nuestros Productos</h2>
-    <div class="products">
+    
+    <div class="product-list">
         {{if .Products}}
             {{range .Products}}
-                <div class="product">
+                <article class="product">
                     <h3>{{.Name}}</h3>
                     <p>{{.Description}}</p>
-                    <p>Precio: ${{.Price}}</p>
-                    <p>Stock: {{.Stock}}</p>
+                    <dl>
+                        <dt>Precio:</dt>
+                        <dd>${{printf "%.2f" .Price}}</dd>
+                        <dt>Stock:</dt>
+                        <dd>{{.Stock}} unidades</dd>
+                    </dl>
                     <a href="/order?productName={{.Name}}">Crear Pedido</a>
-                </div>
+                </article>
             {{end}}
         {{else}}
             <p>No hay productos disponibles</p>
         {{end}}
     </div>
-</div>
+</section>
 {{end}}

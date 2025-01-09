@@ -1,21 +1,26 @@
 {{define "content"}}
-<div>
+<section>
     <h2>Crear Pedido</h2>
+    
     <form action="/order" method="POST">
         <input type="hidden" name="productName" value="{{.ProductName}}">
+        
         <div>
-            <label>Producto:</label>
-            <input type="text" value="{{.ProductName}}" disabled>
+            <label for="product">Producto:</label>
+            <input type="text" id="product" value="{{.ProductName}}" disabled>
         </div>
+        
         <div>
-            <label>Nombre del Cliente:</label>
-            <input type="text" name="customerName" required>
+            <label for="customerName">Nombre del Cliente:</label>
+            <input type="text" id="customerName" name="customerName" required>
         </div>
+        
         <div>
-            <label>Cantidad:</label>
-            <input type="number" name="quantity" min="1" required>
+            <label for="quantity">Cantidad:</label>
+            <input type="number" id="quantity" name="quantity" min="1" required>
         </div>
+        
         <button type="submit">Crear Pedido</button>
     </form>
-</div>
+</section>
 {{end}}

@@ -1,18 +1,27 @@
 {{define "layout"}}
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Tienda Pingüino</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda de Pingüinos</title>
 </head>
 <body>
     <header>
-        <h1>Tienda Pingüino</h1>
+        <h1>Tienda de Pingüinos</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+            </ul>
+        </nav>
     </header>
 
-    {{template "content" .}}
+    <main>
+        {{template "content" .}}
+    </main>
 
     <footer>
-        <p>Larry el pinguino</p>
+        <p>&copy; 2025 Tienda de Pingüinos. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>
