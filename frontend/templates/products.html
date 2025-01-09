@@ -9,6 +9,7 @@
                     <p>{{.Description}}</p>
                     <p>Precio: ${{.Price}}</p>
                     <p>Stock: {{.Stock}}</p>
+                    <a href="/order?productName={{.Name}}">Crear Pedido</a>
                 </div>
             {{end}}
         {{else}}
