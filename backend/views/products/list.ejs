@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <h1>Productos</h1>
+    <a href="/products/create?token=<%= query.token %>">Crear Nuevo Producto</a>
+    
+    <table border="1">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th>
+        </tr>
+        <% products.forEach(function(product) { %>
+            <tr>
+                <td><%= product.name %></td>
+                <td><%= product.description %></td>
+                <td><%= product.price %></td>
+                <td><%= product.stock %></td>
+                <td>
+                    <a href="/products/edit/<%= product._id %>?token=<%= query.token %>">Editar</a>
+                    <a href="/products/delete/<%= product._id %>?token=<%= query.token %>" onclick="return confirm('¿Estás seguro?')">Eliminar</a>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+</body>
+</html>

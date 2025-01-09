@@ -5,6 +5,17 @@
 </head>
 <body>
     <h1>Dashboard</h1>
-    <p>Bienvenido</p>
+    <p>Bienvenido al panel de administración</p>
+    
+    <a href="/products" id="productsLink">Ver Productos</a>
+
+    <script>
+        localStorage.setItem('authToken', '<%= token %>');
+        
+        document.getElementById('productsLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = '/products?token=' + localStorage.getItem('authToken');
+        });
+    </script>
 </body>
 </html>

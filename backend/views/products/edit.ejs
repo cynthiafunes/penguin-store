@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Producto</title>
+</head>
+<body>
+    <h1>Editar Producto</h1>
+    <form action="/products/edit/<%= product._id %>?token=<%= query.token %>" method="POST">
+        <div>
+            <label>Nombre:</label>
+            <input type="text" name="name" value="<%= product.name %>" required>
+        </div>
+        <div>
+            <label>Descripción:</label>
+            <textarea name="description" required><%= product.description %></textarea>
+        </div>
+        <div>
+            <label>Precio:</label>
+            <input type="number" name="price" value="<%= product.price %>" required>
+        </div>
+        <div>
+            <label>Stock:</label>
+            <input type="number" name="stock" value="<%= product.stock %>" required>
+        </div>
+        <button type="submit">Actualizar Producto</button>
+    </form>
+    <a href="/products?token=<%= query.token %>">Volver a la lista</a>
+</body>
+</html>

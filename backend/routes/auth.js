@@ -17,12 +17,8 @@ router.post('/login', function(req, res) {
 
     Admin.findOne({ username: username })
         .then(function(admin) {
-            if (!admin) {
-                return res.render('login', { error: 'Usuario no existe' });
-            }
-
-            if (admin.password !== password) {
-                return res.render('login', { error: 'Contraseña incorrecta' });
+            if (!admin || admin.password !== password) {
+                return res.render('login', { error: 'Usuario o contraseña incorrectos' });
             }
 
             let token = jwt.sign(

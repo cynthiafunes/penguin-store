@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 function verificarToken(req, res, next) {
-    let token = req.headers.authorization;
+    let token = req.headers.authorization || req.query.token;
 
     if (!token) {
         return res.redirect('/login');

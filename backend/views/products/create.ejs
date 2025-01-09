@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Producto</title>
+</head>
+<body>
+    <h1>Crear Nuevo Producto</h1>
+    <form action="/products?token=<%= query.token %>" method="POST">
+        <div>
+            <label>Nombre:</label>
+            <input type="text" name="name" required>
+        </div>
+        <div>
+            <label>Descripción:</label>
+            <textarea name="description" required></textarea>
+        </div>
+        <div>
+            <label>Precio:</label>
+            <input type="number" name="price" required>
+        </div>
+        <div>
+            <label>Stock:</label>
+            <input type="number" name="stock" required>
+        </div>
+        <button type="submit">Guardar Producto</button>
+    </form>
+    <a href="/products?token=<%= query.token %>">Volver a la lista</a>
+</body>
+</html>

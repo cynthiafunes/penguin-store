@@ -14,7 +14,10 @@ mongoose.connect(process.env.MONGODB_URI)
     .catch((err) => console.log('Error conectando a MongoDB:', err));
 
 const authRoutes = require('./routes/auth');
+const productRoutes = require('./routes/products');
+
 app.use('/', authRoutes);
+app.use('/', productRoutes);
 
 app.listen(3000, () => {
   console.log(`Server running http://localhost:${3000}`);
