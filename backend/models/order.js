@@ -9,7 +9,6 @@ const orderSchema = mongoose.Schema({
         price: Number
     }],
     total: Number,
-    status: String,
     date: { 
         type: Date, 
         default: Date.now 

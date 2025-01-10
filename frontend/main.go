@@ -14,6 +14,7 @@ import (
 type Product struct {
     Name        string  `bson:"name"`
     Description string  `bson:"description"`
+    IgluAddress   string  `bson:"igluAddress"`  
     Price       float64 `bson:"price"`
     Stock       int     `bson:"stock"`
 }
@@ -21,6 +22,7 @@ type Product struct {
 type Order struct {
     ProductName string  `bson:"productName"`
     CustomerName string `bson:"customerName"`
+    IgluAddress string `bson:"igluAdress"`
     Quantity    int     `bson:"quantity"`
     Total       float64 `bson:"total"`
 }
@@ -83,6 +85,7 @@ func showOrderForm(w http.ResponseWriter, r *http.Request, client *mongo.Client)
 func createOrder(w http.ResponseWriter, r *http.Request, client *mongo.Client) {
     productName := r.FormValue("productName")
     customerName := r.FormValue("customerName")
+    igluAddress := r.FormValue("igluAddress")
     quantity, _ := strconv.Atoi(r.FormValue("quantity"))
 
     collection := client.Database("penguin-store").Collection("products")
@@ -98,6 +101,7 @@ func createOrder(w http.ResponseWriter, r *http.Request, client *mongo.Client) {
     order := Order{
         ProductName:   productName,
         CustomerName:  customerName,
+        IgluAddress:   igluAddress,
         Quantity:      quantity,
         Total:         total,
     }

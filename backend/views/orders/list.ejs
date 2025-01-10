@@ -10,7 +10,6 @@
             <th>Fecha</th>
             <th>Cliente</th>
             <th>Total</th>
-            <th>Estado</th>
             <th>Acciones</th>
         </tr>
         <% orders.forEach(function(order) { %>
@@ -18,7 +17,6 @@
                 <td><%= order.date.toLocaleDateString() %></td>
                 <td><%= order.customerName %></td>
                 <td>₲<%= order.total %></td>
-                <td><%= order.status %></td>
                 <td>
                     <a href="/orders/<%= order._id %>?token=<%= query.token %>">Ver Detalle</a>
                 </td>
@@ -29,3 +27,5 @@
     <a href="/dashboard?token=<%= query.token %>">Volver al Dashboard</a>
 </body>
 </html>
+
+<a href="/dashboard?token="
