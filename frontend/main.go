@@ -9,6 +9,7 @@ import (
     "go.mongodb.org/mongo-driver/bson"
     "context"
     "strconv"
+    "time"
 )
 
 type Product struct {
@@ -19,12 +20,19 @@ type Product struct {
     Stock       int     `bson:"stock"`
 }
 
+type OrderProduct struct {
+    Name     string  `bson:"name"`
+    Quantity int     `bson:"quantity"`
+    Price    float64 `bson:"price"`
+}
+
 type Order struct {
-    ProductName string  `bson:"productName"`
-    CustomerName string `bson:"customerName"`
-    IgluAddress string `bson:"igluAdress"`
-    Quantity    int     `bson:"quantity"`
-    Total       float64 `bson:"total"`
+    CustomerName string         `bson:"customerName"`
+    Address     string         `bson:"address"`
+    Products    []OrderProduct `bson:"products"`
+    Total       float64        `bson:"total"`
+    Date        time.Time      `bson:"date"`
+    Status      string          `bson:"status"`
 }
 
 func main() {
@@ -98,12 +106,19 @@ func createOrder(w http.ResponseWriter, r *http.Request, client *mongo.Client) {
 
     total := product.Price * float64(quantity)
 
+    orderProduct := OrderProduct{
+        Name:     productName,
+        Quantity: quantity,
+        Price:    product.Price,
+    }
+
     order := Order{
-        ProductName:   productName,
-        CustomerName:  customerName,
-        IgluAddress:   igluAddress,
-        Quantity:      quantity,
-        Total:         total,
+        CustomerName: customerName,
+        Address:     igluAddress,
+        Products:    []OrderProduct{orderProduct},
+        Total:       total,
+        Date:       time.Now(),
+        Status:     "Pendiente",
     }
 
     _, err = client.Database("penguin-store").Collection("orders").InsertOne(context.TODO(), order)
